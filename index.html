@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MAD. | Grafik Tasarım ve Reklamcılık</title>
+<meta name="description" content="MAD.: grafik tasarım, web sitesi tasarımı, sosyal medya içerik üretimi ve baskı işleri.">
+<meta property="og:title" content="MAD. | Grafik Tasarım ve Reklamcılık">
+<meta property="og:image" content="assets/mad-logo-poster.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230a0a0a'/%3E%3Ctext x='32' y='46' font-size='40' font-family='Georgia,serif' font-weight='700' text-anchor='middle' fill='%23e0e0e0'%3EM%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;600&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0a;--silver:#e0e0e0;--accent:#ff3c00;--paper:#e1e3e2;--ink:#111;--muted:#a3a3a3;--pad:clamp(1.5rem,5vw,4rem)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--silver);font-family:'Bodoni Moda',Georgia,serif;font-size:1.05rem;line-height:1.6}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.display{font-family:'Syncopate',Arial,sans-serif}
+
+/* grain */
+.grain{position:fixed;inset:0;pointer-events:none;z-index:100;opacity:.1;filter:url(#grain)}
+
+/* header */
+.top{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:1.5rem var(--pad);color:#fff;mix-blend-mode:difference;font-family:'Syncopate',Arial,sans-serif;font-size:.75rem}
+.top .brand{font-weight:700;font-size:1rem;text-decoration:none}
+.top nav a{margin-left:2rem;text-decoration:none}
+.top nav a:hover{text-decoration:underline;text-underline-offset:6px}
+
+/* hero */
+.hero{position:relative;height:100vh;height:100svh;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.viewport{perspective:2000px;position:absolute;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.canvas-3d{position:relative;width:800px;height:500px;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.16,1,.3,1)}
+.layer{position:absolute;inset:0;border:1px solid rgba(224,224,224,.1);background-size:cover;background-position:center;transition:transform .5s ease}
+.layer-1{background-image:url('https://cdn.21st.dev/assets/mirror/e5/e5ef2d30267a4e7f81bc0a61283385f0e59c348d8e69a017f1a87b5323fd8abc.jpg');filter:grayscale(1) contrast(1.2) brightness(.5)}
+.layer-2{background-image:url('https://cdn.21st.dev/assets/mirror/80/80f63f867cb6db0e217d01b6b23e0d623b38d7791dc6a5c6b647744541e4f71d.jpg');filter:grayscale(1) contrast(1.1) brightness(.7);opacity:.6;mix-blend-mode:screen}
+.layer-3{background-image:url('https://cdn.21st.dev/assets/mirror/59/597353f775e864ce7ab427b39deecf97b8de0560e30cb3749da756c896a17023.jpg');filter:grayscale(1) contrast(1.3) brightness(.8);opacity:.4;mix-blend-mode:overlay}
+.contours{position:absolute;width:200%;height:200%;top:-50%;left:-50%;background-image:repeating-radial-gradient(circle at 50% 50%,transparent 0,transparent 40px,rgba(255,255,255,.05) 41px,transparent 42px);transform:translateZ(120px);pointer-events:none}
+.hero-ui{position:absolute;inset:0;padding:6rem var(--pad) 3rem;display:grid;grid-template-rows:1fr auto;z-index:10;pointer-events:none}
+.hero-title{align-self:center;margin:0;font-size:clamp(4rem,16vw,15rem);line-height:.85;letter-spacing:-.04em;mix-blend-mode:difference}
+.hero-sub{display:block;margin-top:1.5rem;font-size:clamp(.7rem,1.3vw,1rem);letter-spacing:.05em;font-weight:400}
+.hero-bottom{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem}
+.hero-meta{font-family:monospace;font-size:.75rem;line-height:1.5}
+.hero-meta p{margin:.25rem 0}
+.cta{pointer-events:auto;background:var(--silver);color:var(--bg);padding:1rem 2rem;text-decoration:none;font-weight:700;font-size:.85rem;clip-path:polygon(0 0,100% 0,100% 70%,85% 100%,0 100%);transition:.3s}
+.cta:hover{background:var(--accent);transform:translateY(-5px)}
+.scroll-hint{position:absolute;bottom:2rem;left:50%;width:1px;height:60px;background:linear-gradient(to bottom,var(--silver),transparent);animation:flow 2s infinite ease-in-out}
+@keyframes flow{0%,100%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}}
+
+/* sections */
+.sec{padding:clamp(4rem,10vw,9rem) var(--pad)}
+.wrap{max-width:1300px;margin:0 auto}
+h2{font-weight:400;font-size:clamp(2.2rem,5vw,4.5rem);line-height:1.05;margin:0 0 3rem;letter-spacing:-.01em}
+.kicker{font-family:'Syncopate',Arial,sans-serif;font-size:.7rem;color:var(--accent);margin:0 0 1rem}
+
+/* services */
+.svc{display:grid;grid-template-columns:1fr 1fr;gap:1rem 3rem;padding:1.75rem 0;border-top:1px solid rgba(224,224,224,.15);transition:color .3s}
+.svc:last-child{border-bottom:1px solid rgba(224,224,224,.15)}
+.svc h3{margin:0;font-weight:400;font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.1}
+.svc p{margin:0;color:var(--muted);max-width:44ch}
+.svc:hover h3{color:var(--accent)}
+
+/* work */
+.work{display:grid;grid-template-columns:repeat(12,1fr);gap:1.5rem}
+.work figure{margin:0;display:flex;flex-direction:column;gap:.75rem}
+.work img{width:100%;flex:1;min-height:0;object-fit:cover;display:block;background:#161616}
+.work figcaption{font-size:.95rem}
+.work figcaption span{display:block;color:var(--muted);font-size:.85rem}
+.w-vw{grid-column:span 8}
+.w-poster{grid-column:span 4}
+.w-home{grid-column:span 7}
+.w-note{grid-column:span 5;display:flex;flex-direction:column;justify-content:center;padding:0 0 0 clamp(0rem,3vw,3rem)}
+.w-note p{font-size:clamp(1.4rem,2.4vw,2rem);line-height:1.25;margin:0 0 1.5rem}
+.w-note a{align-self:flex-start;font-family:'Syncopate',Arial,sans-serif;font-size:.8rem;font-weight:700;text-underline-offset:6px}
+
+/* about + logo video */
+.paper{background:var(--paper);color:var(--ink)}
+.paper .kicker{color:#b52a00}
+.logo-video{display:block;width:100%;max-width:1100px;margin:0 auto 4rem;mix-blend-mode:multiply;background:var(--paper)}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:2rem 4rem;align-items:start}
+.about h2{margin:0}
+.about p{margin:0;max-width:52ch;font-size:1.15rem}
+
+/* contact */
+.contact h2{font-size:clamp(2.6rem,7vw,6.5rem)}
+.contact dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:1.1rem 3rem;max-width:640px}
+.contact dt{color:var(--muted)}
+.contact dd{margin:0}
+.contact a{text-underline-offset:5px}
+footer{padding:2rem var(--pad);display:flex;justify-content:space-between;gap:1rem;font-size:.85rem;color:var(--muted);border-top:1px solid rgba(224,224,224,.12)}
+
+@media (max-width:800px){
+  .top nav a{margin-left:1rem}
+  .hero-ui{padding-top:5rem}
+  .canvas-3d{width:92vw;height:58vw}
+  .hero-bottom{flex-direction:column;align-items:flex-start}
+  .scroll-hint{display:none}
+  .svc,.about{grid-template-columns:1fr}
+  .w-vw,.w-poster,.w-home,.w-note{grid-column:1/-1}
+  .w-note{padding:1rem 0 0}
+  .contact dl{grid-template-columns:1fr;gap:.2rem}
+  .contact dd{margin-bottom:1rem}
+  footer{flex-direction:column}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .scroll-hint{animation:none}
+  .canvas-3d,.layer,.cta{transition:none}
+}
+</style>
+</head>
+<body>
+<svg style="position:absolute;width:0;height:0" aria-hidden="true"><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3"/><feColorMatrix type="saturate" values="0"/></filter></svg>
+<div class="grain"></div>
+
+<header class="top">
+  <a class="brand" href="#top">MAD.</a>
+  <nav><a href="#hizmetler">Hizmetler</a><a href="#isler">İşler</a><a href="#iletisim">İletişim</a></nav>
+</header>
+
+<main id="top">
+  <section class="hero" aria-label="MAD. reklam ajansı">
+    <div class="hero-ui">
+      <h1 class="hero-title display">MAD.<span class="hero-sub">Grafik tasarım ve reklamcılık</span></h1>
+      <div class="hero-bottom">
+        <div class="hero-meta">
+          <p>[ GRAFİK / WEB / SOSYAL MEDYA / BASKI ]</p>
+          <p>FİKİRDEN BASKIYA, TEK ELDEN</p>
+        </div>
+        <a href="#isler" class="cta display">İŞLERİ GÖR</a>
+      </div>
+    </div>
+    <div class="viewport">
+      <div class="canvas-3d" id="canvas">
+        <div class="layer layer-1"></div>
+        <div class="layer layer-2"></div>
+        <div class="layer layer-3"></div>
+        <div class="contours"></div>
+      </div>
+    </div>
+    <div class="scroll-hint"></div>
+  </section>
+
+  <section class="sec" id="hizmetler">
+    <div class="wrap">
+      <p class="kicker">Hizmetler</p>
+      <h2>Markanız için dört iş kolu.</h2>
+      <div>
+        <div class="svc"><h3>Grafik tasarım</h3><p>Logo, afiş, billboard ve kampanya görselleri. Markanızın her yerde aynı dili konuşmasını sağlarız.</p></div>
+        <div class="svc"><h3>Web sitesi tasarımı</h3><p>Telefonda da bilgisayarda da hızlı açılan, markanızı doğru anlatan siteler.</p></div>
+        <div class="svc"><h3>Sosyal medya içerik üretimi</h3><p>Paylaşım görselleri, videolar ve içerik planı. Hesabınız düzenli ve tutarlı görünsün diye.</p></div>
+        <div class="svc"><h3>Baskı işleri</h3><p>Tasarımdan baskıya kadar süreci biz yürütürüz: afiş, katalog, kartvizit, tabela ve açık hava.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="isler" style="padding-top:0">
+    <div class="wrap">
+      <p class="kicker">İşler</p>
+      <h2>Seçilmiş çalışmalar.</h2>
+      <div class="work">
+        <figure class="w-vw"><img src="assets/vw-next-chapter.jpg" alt="Volkswagen Golf için “Just for your next chapter” kampanya görseli" loading="lazy" width="1536" height="1024"><figcaption>Volkswagen, “Just for your next chapter”<span>Kampanya görseli</span></figcaption></figure>
+        <figure class="w-poster"><img src="assets/anahtar-parti-afis.jpg" alt="Anahtar Parti Ardahan İl Başkanlığı afişi" loading="lazy" width="1100" height="1556"><figcaption>Anahtar Parti, Ardahan İl Başkanlığı<span>Afiş, A3 baskı</span></figcaption></figure>
+        <figure class="w-home"><img src="assets/homeev-billboard.jpg" alt="HOMEEV için billboard tasarımı" loading="lazy" width="1600" height="1200"><figcaption>HOMEEV<span>Billboard tasarımı</span></figcaption></figure>
+        <div class="w-note"><p>Portfolyo büyüyor. Yeni işler eklendikçe buraya gelecek.</p><a href="#iletisim">Sıradaki iş sizin olsun</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec paper" id="ajans">
+    <div class="wrap">
+      <video class="logo-video" src="assets/mad-logo.mp4" poster="assets/mad-logo-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="MAD. logo animasyonu"></video>
+      <div class="about">
+        <div><p class="kicker">Ajans</p><h2>Fikirden baskıya, tek elden.</h2></div>
+        <p>MAD., markalar için görsel kimlik, web sitesi, sosyal medya içeriği ve baskı işlerini baştan sona tek çatı altında yürütür. Tasarımı yapan ile baskıyı takip eden aynı yerde olduğu için iş el değiştirmez, bilgi kaybolmaz.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec contact" id="iletisim">
+    <div class="wrap">
+      <p class="kicker">İletişim</p>
+      <h2>Projenizi konuşalım.</h2>
+      <!-- Aşağıdaki köşeli parantezli yerleri kendi bilgilerinle değiştir -->
+      <dl>
+        <dt>E-posta</dt><dd><a href="mailto:ORNEK@EPOSTA.COM">[e-posta adresin]</a></dd>
+        <dt>Telefon</dt><dd><a href="tel:+90000000000">[telefon numaran]</a></dd>
+        <dt>Instagram</dt><dd><a href="https://instagram.com/KULLANICIADI">[@kullaniciadin]</a></dd>
+      </dl>
+    </div>
+  </section>
+</main>
+
+<footer><span>© 2026 MAD.</span><a href="#top">Başa dön</a></footer>
+
+<script>
+(function(){
+  var hero=document.querySelector('.hero'),canvas=document.getElementById('canvas'),layers=canvas.querySelectorAll('.layer');
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce){canvas.style.transform='rotateX(55deg) rotateZ(-25deg)';return;}
+  canvas.style.opacity='0';
+  canvas.style.transform='rotateX(90deg) rotateZ(0deg) scale(0.8)';
+  setTimeout(function(){
+    canvas.style.transition='all 2.5s cubic-bezier(0.16, 1, 0.3, 1)';
+    canvas.style.opacity='1';
+    canvas.style.transform='rotateX(55deg) rotateZ(-25deg) scale(1)';
+  },300);
+  hero.addEventListener('mousemove',function(e){
+    var x=(window.innerWidth/2-e.pageX)/25,y=(window.innerHeight/2-e.clientY)/25;
+    canvas.style.transform='rotateX('+(55+y/2)+'deg) rotateZ('+(-25+x/2)+'deg)';
+    layers.forEach(function(l,i){
+      l.style.transform='translateZ('+((i+1)*15)+'px) translate('+(x*(i+1)*.2)+'px,'+(y*(i+1)*.2)+'px)';
+    });
+  });
+})();
+</script>
+</body>
+</html>
